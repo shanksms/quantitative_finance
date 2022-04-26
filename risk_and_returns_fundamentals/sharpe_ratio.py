@@ -38,8 +38,9 @@ def annualized_return(return_df):
     return annual_return
 
 
-def sharpe_ratio():
-    pass
+def sharpe_ratio(annualized_returns, annualized_vol):
+    # Higher sharpe ratio is better
+    return (annualized_returns - risk_free_rate) / annualized_vol
 
 
 if __name__ == '__main__':
@@ -53,3 +54,8 @@ if __name__ == '__main__':
     print('#' * 80)
     print('annualized return')
     print(annualized_return(return_df))
+    print('#' * 80)
+    print('sharpe ratio')
+    print(
+        sharpe_ratio(annualized_return(return_df), annualized_vol(return_df))
+    )
