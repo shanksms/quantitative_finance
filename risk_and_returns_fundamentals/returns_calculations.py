@@ -27,4 +27,12 @@ compounded_return = (1 + returns).prod() - 1
 print(compounded_return)
 
 
-
+#Annualized returns
+"""
+Lets say, you are getting 1 percent monthly return. Below is how you can annualize it.
+"""
+rm = 0.01
+ra = (1 + rm) ** 12 - 1
+print('#' * 80)
+print('annualized compounded return')
+print(ra)
