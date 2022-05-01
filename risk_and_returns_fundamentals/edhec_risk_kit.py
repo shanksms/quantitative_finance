@@ -5,6 +5,24 @@ from scipy.stats import norm
 
 file_path = r'../data/Portfolios_Formed_on_ME_monthly_EW.csv'
 
+
+def annualized_return(return_df):
+    """
+
+    :param return_df:
+    :return:
+    """
+    number_of_months = return_df.shape[0]
+    total_return = (1 + return_df).prod() - 1
+    monthly_return = (1 + return_df).prod()**(1/number_of_months) - 1
+    annual_return = (1+monthly_return)**12 - 1
+    """
+    short form is below:
+    (1 + return_df).prod()**(12/number_of_months) - 1
+    """
+    return annual_return
+
+
 def drawdown(return_series):
     """
         1. Compute Wealth index
@@ -107,7 +125,15 @@ def var_gaussian(r: pd.DataFrame, level=5, modified=False):
 
     return -(r.mean() + z * r.std(ddof=0))
 
+
+def get_ind_returns():
+    ind = pd.read_csv('../data/ind30_m_vw_rets.csv', header=0, index_col=0)/100
+    ind.index = pd.to_datetime(ind.index, format='%Y%m').to_period('M')
+    ind.columns = ind.columns.str.strip()
+    return ind
+
+
 if __name__ == '__main__':
     print(get_ffme_returns().head())
     print(get_ffme_returns().head())
-    print()
+    print(get_ind_returns().head())

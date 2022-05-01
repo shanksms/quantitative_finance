@@ -2,6 +2,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+from risk_and_returns_fundamentals import edhec_risk_kit
+
+
+
 file_path = r'../data/Portfolios_Formed_on_ME_monthly_EW.csv'
 risk_free_rate = 0.03
 
@@ -21,21 +25,6 @@ def read_returns():
 def annualized_vol(return_df):
     return return_df.std()*np.sqrt(12)
 
-def annualized_return(return_df):
-    """
-
-    :param return_df:
-    :return:
-    """
-    number_of_months = return_df.shape[0]
-    total_return = (1 + return_df).prod() - 1
-    monthly_return = (1 + return_df).prod()**(1/number_of_months) - 1
-    annual_return = (1+monthly_return)**12 - 1
-    """
-    short form is below:
-    (1 + return_df).prod()**(12/number_of_months) - 1
-    """
-    return annual_return
 
 
 def sharpe_ratio(annualized_returns, annualized_vol):
@@ -53,7 +42,7 @@ if __name__ == '__main__':
     print(annualized_vol(return_df))
     print('#' * 80)
     print('annualized return')
-    print(annualized_return(return_df))
+    print(edhec_risk_kit.annualized_return(return_df))
     print('#' * 80)
     print('sharpe ratio')
     print(
