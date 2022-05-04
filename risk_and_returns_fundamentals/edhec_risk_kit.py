@@ -133,6 +133,13 @@ def get_ind_returns():
     return ind
 
 
+def portfolio_return(weights, returns):
+    return np.dot(weights.T, returns)
+
+
+def portfolio_volatility(weights, covmat):
+    return np.dot(np.dot(weights.T, covmat), weights) ** 0.5
+
 if __name__ == '__main__':
     print(get_ffme_returns().head())
     print(get_ffme_returns().head())
