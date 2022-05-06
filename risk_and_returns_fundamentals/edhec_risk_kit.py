@@ -2,6 +2,7 @@ import pandas as pd
 from scipy import stats
 import numpy as np
 from scipy.stats import norm
+import matplotlib.pyplot as plt
 
 file_path = r'../data/Portfolios_Formed_on_ME_monthly_EW.csv'
 
@@ -139,6 +140,22 @@ def portfolio_return(weights, returns):
 
 def portfolio_volatility(weights, covmat):
     return np.dot(np.dot(weights.T, covmat), weights) ** 0.5
+
+
+def plot_ef2(n_points, er, cov, style="."):
+    weight_vec_list = [np.array([w, 1 - w]) for w in np.linspace(0, 1, n_points)]
+    ind = get_ind_returns()
+    df = pd.DataFrame(
+        {
+            'returns': [portfolio_return(wt_vec, er) for wt_vec in
+                        weight_vec_list],
+            'volatility': [portfolio_volatility(wt_vec, cov) for wt_vec in weight_vec_list]
+        }
+    )
+    df.plot.line(x='volatility', y='returns', style=style)
+    plt.show()
+    return
+
 
 if __name__ == '__main__':
     print(get_ffme_returns().head())

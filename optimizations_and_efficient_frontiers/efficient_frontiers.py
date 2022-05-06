@@ -22,21 +22,13 @@ def port_return_and_vol_demo():
     print(portfolio_volatility(weights, cov.loc[l, l]))
 
 def two_asset_efficient_portfolio_demo():
-    weight_vec_list = [np.array([w, 1-w]) for w in np.linspace(0, 1, 20)]
     l = ['Games', 'Fin']
-    ind = edhec_risk_kit.get_ind_returns()
+    ind = edhec_risk_kit.get_ind_returns()[l]
     annualized_return_1995_to_2000 = edhec_risk_kit.annualized_return(ind['1996':'2000'])
     # plt.show()
     # calculate volatility
     cov = ind['1996': '2000'].cov()
-    df = pd.DataFrame(
-        {
-            'returns': [edhec_risk_kit.portfolio_return(wt_vec, annualized_return_1995_to_2000[l]) for wt_vec in weight_vec_list],
-            'volatility': [edhec_risk_kit.portfolio_volatility(wt_vec, cov.loc[l, l]) for wt_vec in weight_vec_list ]
-        }
-    )
-    df.plot.scatter(x='volatility', y='returns')
-    plt.show()
+    edhec_risk_kit.plot_ef2(20, annualized_return_1995_to_2000, cov)
 
 
 if __name__ == '__main__':
