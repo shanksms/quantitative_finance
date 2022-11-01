@@ -20,8 +20,18 @@ where b11, b12 etc are some coeficients. there are also called as factor loading
 #### CAPM
 As per capm, excess return of any security is beta of the security multiplied by the excess return of the market itself.  
 As you can see, capm is a special case of factor model. In capm, there is just one factor which is market.  
-![](images/capm.png)
+![](images/capm.png)  
 if you plot every security excess return with its beta, you will find a straight line. slope of the st line will be the excess market return.  
+This line is called, security market line.  
+
+#### Multi factor models and Fama-French
+in Fama and French factor model, we add small and value factor as well in addition to market factor.  
+![](images/fama_french.png)
+  
+#### Factor benchmark and style analysis
+![](images/factor_benchmark.png)  
+  
+![](images/alpha.png)
 
 
 
